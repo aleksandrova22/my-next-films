@@ -47,7 +47,7 @@ export function Films({ films }) {
     return <div>
         {console.log(films)}
         
-        {/* {[...films].map(f => <Film film={f} key={f.imdbID}/>)} */}
+        {[...films].map(f => <Film film={f} key={f.imdbID}/>)}
     </div>;
 
 }
