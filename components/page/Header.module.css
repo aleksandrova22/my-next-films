@@ -1,0 +1,10 @@
+.navigation {
+    & ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+        margin: 0;
+        font-size: x-large;
+        background-color: beige;
+    }
+}
