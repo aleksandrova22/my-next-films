@@ -1,0 +1,36 @@
+.objtable {
+    border-collapse: collapse;
+    font-family: sans-serif;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid rgb(5, 5, 63);
+    padding: 2px;
+
+
+    & td {
+        border: 1px solid lightblue;
+        padding: 3px;
+    }
+
+
+    & thead {
+        font-size: large;
+        color: white;
+        background-color: rgb(45, 95, 214);
+    }
+    
+    & tbody {
+        background-color: rgb(218, 227, 247);
+    }
+    
+    & tbody tr:nth-child(even) {
+        background-color: rgb(192, 206, 238);
+    }
+    
+      
+    & tbody tr:hover {
+        background-color: orange;
+      }
+      
+
+}
