@@ -24,7 +24,7 @@ export default function GetFilms() {
         {console.log(films)}
         {(status) &&
             <Fetcher
-                url={'http://www.omdbapi.com/?apikey=f7517aad&s=' + value + '&page=' + indexPage}
+                url={'https://www.omdbapi.com/?apikey=f7517aad&s=' + value + '&page=' + indexPage}
                 onLoad={onload}>
                 <Films data={films.Search} />
             </Fetcher>
@@ -56,7 +56,7 @@ function Film({ film }) {
         {visible && <PopupWindow >
             <button onClick={() => setVisible(false)}>close</button>
             {/* <div onClick={() => setVisible(false)}> */}
-            <img src={'http://img.omdbapi.com/?apikey=f7517aad&i=' + film.imdbID} />
+            <img src={'https://img.omdbapi.com/?apikey=f7517aad&i=' + film.imdbID} />
             {/* </div> */}
             {/* <Fetcher
                 url={'http://img.omdbapi.com/?apikey=f7517aad&i=' + film.imdbID}

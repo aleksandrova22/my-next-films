@@ -3,13 +3,11 @@
     inset: 0;
     /* box-shadow: 0 0 20px 3px gray; */
     cursor: pointer;
-    position: fixed;
-    background-color: lightblue;
-    opacity: 1;
+   
 
-
+/* 
    & img {
         width: auto;
         height: 100%;
-    }
+    } */
 }
