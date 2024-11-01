@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Spinner } from '../Spinner';
 import { ErrorInfo } from '../Error';
 
-export function Fetcher({ url, onLoad, children }) {
+export function Fetcher({ url, onLoad = null, children, type }) {
     const
         [data, setData] = useState(null),
         [error, setError] = useState(null);
@@ -15,7 +15,7 @@ export function Fetcher({ url, onLoad, children }) {
                 const
                     response = await fetch(url);
                 if (!response.ok) throw new Error(response.status + response.statusText);
-                onLoad(await response.json());
+                if (type) onLoad(await response.json());
                 setData(true);
             } catch (err) {
                 setError(err);
@@ -28,5 +28,5 @@ export function Fetcher({ url, onLoad, children }) {
     if (data)
         return <>{children}</>
     return <Spinner />;
-
 }
+

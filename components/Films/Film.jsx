@@ -2,8 +2,9 @@ import { Fetcher } from "@/components/Fetcher";
 import { useCallback, useState } from "react";
 import { PopupWindow } from "../PopupWindow";
 import classes from './Film.module.css';
-// import { ObjTable } from "@/components/ObjTable";
-// import { config } from "@/components/configs/jsph";
+import { SimpleTable } from "../ObjTable";
+import { config } from "../configs/jsph";
+
 
 
 export default function GetFilms() {
@@ -15,17 +16,18 @@ export default function GetFilms() {
             () => setStatus(true),
             [],
         ),
+        //пока одна страничка
         indexPage = 1,
         onload = useCallback(data => setFilms(data), []);
 
     return <>
         <input type='search' value={value} onInput={event => setValue(event.currentTarget.value)} />
-        <button onClick={memoizedCallback}> Click me </button>
+        <button onClick={memoizedCallback}> Search </button>
         {console.log(films)}
         {(status) &&
             <Fetcher
                 url={'https://www.omdbapi.com/?apikey=f7517aad&s=' + value + '&page=' + indexPage}
-                onLoad={onload}>
+                onLoad={onload} type={true}>
                 <Films data={films.Search} />
             </Fetcher>
 
@@ -34,8 +36,8 @@ export default function GetFilms() {
 }
 
 function Films({ data }) {
-    if (!data) return <span>no found</span>
-    return <div className={classes.film}>
+    if (!data) return <span>No found!</span>
+    return <div className={classes.films}>
         {console.log(data)}
         {data.map(f => <Film film={f} key={f.imdbID} />)}
     </div>;
@@ -43,45 +45,26 @@ function Films({ data }) {
 
 function Film({ film }) {
     const
-    [visible, setVisible] = useState(false);
-
-    return <fieldset  onClick={() => setVisible(true)}>
-        <legend> film: {film.imdbID}</legend>
-        <span > {film.Title} </span>
-        <span>{film.Year}</span>
-        <span>{film.Type}</span>
-        <img src={film.Poster} />
-
-
-        {visible && <PopupWindow >
-            <button onClick={() => setVisible(false)}>close</button>
-            {/* <div onClick={() => setVisible(false)}> */}
-            <img src={'https://img.omdbapi.com/?apikey=f7517aad&i=' + film.imdbID} />
-            {/* </div> */}
-            {/* <Fetcher
-                url={'http://img.omdbapi.com/?apikey=f7517aad&i=' + film.imdbID}
-                onLoad={onload}>
-                                    
-            </Fetcher> */}
-
-        </PopupWindow>}
-     
-    </fieldset>;
-}
-
-
-//подробности о фильме по клику на картинку
-
-
-//вывод в модальное окно
-
-function FilmModal() {
-    const
+        url = 'https://img.omdbapi.com/?apikey=f7517aad&i=' + film.imdbID,
         [visible, setVisible] = useState(false);
-    return <fieldset>
-        <button onClick={() => setVisible(true)}>open</button>
-        
-    </fieldset>
+
+    return <div>
+        <div className={classes.filminfo} onClick={() => setVisible(true)}>
+            <div> <img height='300px' src={film.Poster} /></div>
+            <div>  <SimpleTable data={film} config={config} type={false}/></div>
+        </div>
+        {/* <div onClick={() => setVisible(false)}>  */}
+
+
+        <div className={classes.filmmodal} onContextMenu={(event) => { setVisible(false); event.preventDefault(); }}>
+            {visible && <PopupWindow >
+                <button onClick={() => setVisible(false)} > Close ❌ </button>
+                <Fetcher url={url}>
+                    <img src={url}  />
+                </Fetcher>
+            </PopupWindow>}
+        </div>
+    </div>;
 }
 
 

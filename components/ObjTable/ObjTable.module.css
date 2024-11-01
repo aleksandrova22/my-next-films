@@ -22,14 +22,10 @@
     & tbody {
         background-color: rgb(218, 227, 247);
     }
-    
-    & tbody tr:nth-child(even) {
-        background-color: rgb(192, 206, 238);
-    }
-    
+ 
       
     & tbody tr:hover {
-        background-color: orange;
+        background-color: rgb(246, 232, 252);
       }
       
 
